@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arquitectura Microkernel</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+
+  <!-- ENCABEZADO SUPERIOR -->
+  <header class="principal">Arquitectura Microkernel</header>
+
+  <!-- BOTÓN MENÚ HAMBURGUESA -->
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <!-- MENÚ LATERAL -->
+  <nav id="menu">
+    <div class="close-btn" onclick="toggleMenu()">✖</div> <!-- Aquí está la X -->
+    <h2>Temas</h2>
+    <ul>
+      <li><a href="#que-es">¿Qué es?</a></li>
+      <li><a href="#objetivos">Sus objetivos</a></li>
+      <li><a href="#componentes">Componentes</a></li>
+      <li><a href="#caracteristicas">Características</a></li>
+      <li><a href="#funciones">Funciones</a></li>
+      <li><a href="#historia">Historia</a></li>
+      <li><a href="#diferencias">Diferencias con arquitectura monolítica</a></li>
+      <li><a href="#como-se-logra">¿Cómo se logra?</a></li>
+      <li><a href="#ventajas-desventajas">Ventajas y desventajas</a></li>
+      <li><a href="#usos">Usos en la actualidad</a></li>
+      <li><a href="#plugins">Arquitectura de plugins</a></li>
+      <li><a href="#ejemplos-plugins">Ejemplos de programas que usan plugins</a></li>
+      <li><a href="#mods">Mods</a></li>
+      <li><a href="#microkernel-vs-plugins">Microkernel vs Plugins</a></li>
+    </ul>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    <!-- Subtemas generados -->
+    <section id="que-es">
+      <div class="section-title"><img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" /> ¿Qué es la arquitectura de microkernel?</div>
+      <div class="section-content">La arquitectura de microkernel es uno de los dinstintos tipos de arquitectura de software existentes.
+Destaca sobre las demás por distintos aspectos: El rol del núcleo (o kernel), es encargarse de la menor cantidad de funciones posibles, siendo éstas las más claves del sistema. Todas las demás funciones se ejecutan en distintos módulos que actúan de manera independiente al núcleo, cónectandose de manera externa con este.</div>
+      <div class="section-image"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjDSO_IXKkMC3YAA3U_rH9NNReL7_8BnxY9kugbf2unH4hsHeqSfesOW1VhtKUcIsq59fetGfLRCOmqcTTC7dThWSMendppA-InJPVfiuW6GX5xFlv7uRG8HDdmKvMAq6W1O4COhDaVs7R6fXijk6jTCeu_4-q_b9VjkCIeNbiu9HAu3uH79sUuPIjIqbk=w640-h228" /></div>
+      </section>
+
+    <!-- Copia idéntica del anterior para los otros 13 subtemas -->
+    <section id="objetivos">
+      <div class="section-title"><img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" /> ¿Cuál es su objetivo?</div>
+      <div class="section-content">
+  <p>
+    El objetivo principal de la arquitectura de microkernel es simplificar la función del núcleo; este núcleo es mucho más pequeño que un núcleo normal (de ahí viene su nombre "microkernel"), y se ocupa de las funciones más importantes y críticas del sistema. Algunas de éstas funciones varían dependiendo del sistema, pero en casi todos los casos gestiona los mismos servicios:
+  </p>
+
+  <ul>
+    <li><strong>Gestión de procesos en los sistemas operativos (o scheduling):</strong> Regula los múltiples procesos que ejecuta el sistema operativo. Decide qué proceso se debe correr y cuándo.</li>
+    <li><strong>Gestión de memoria:</strong> Controla y administra la memoria del sistema.</li>
+    <li><strong>Comunicación entre procesos (IPC):</strong> Proporciona canales seguros para que tanto los módulos, como los procesos se puedan comunicar.</li>
+    <li><strong>Manejo en la interrupción del hardware:</strong> Requiere únicamente lo mínimo y necesario para responder al entorno físico.</li>
+  </ul>
+
+  <p>
+    Este pequeño conjunto de funciones permite lo que se llama una base de computador estable, o TCB (Trusting Computing Base por sus siglas en inglés), implementando exclusivamente esas tareas, ya que, recordemos que la idea del núcleo es que se encargue del mínimo de funciones, por lo que, entre más simplificado sea el trabajo del microkernel, mucho mejor.
+  </p>
+
+  <p>
+    Como el núcleo realiza muy pocas tareas, el resto de procesos o funciones se establecen en módulos independientes del núcleo. Esto asegura que el núcleo trabaje de manera mucho más eficiente, cumpliendo solo con su rol y trabajando solo en lo esencial. A causa de que el sistema dentro del núcleo ya está establecido, si una de las funciones que se encuentran fuera del núcleo falla, no afectará directamente a este, mucho menos a otra función, debido a que cada servicio está aislado, proporcionando seguridad y eficiencia dentro de todo el sistema.
+  </p>
+
+  <p>
+    Una de las muchas ventajas que existen acerca de que el sistema tenga una gran cantidad de módulos que no dependen del núcleo para funcionar, es que, permite que se puedan añadir, cambiar, quitar, actualizar o reutilizar diferentes servicios sin interactuar con el microkernel.
+  </p>
+
+  <p>
+    Cualquier función que no se encuentre dentro del microkernel, se puede conectar con este a través de comunicación entre procesos (IPC), como si fuera una red de mensajería, donde el microkernel responde a las diferentes funciones solicitadas por los demás servicios del sistema.
+  </p>
+
+  <p>
+    Todo esto cumple con el propósito de brindar mayor estabilidad, seguridad y facilidad a la hora de mantener el sistema, siendo eficiente.
+  </p>
+</div>
+
+      <div class="section-image"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjfkbXagLKwZgdyJP9vstKku_pXp9X2VbOgavBfKoOUnGLNG3w4dMaCPibUiYPJHdgKquXcpnbzGl66x1pYZJ2RefdG76Ka3hNa6Inl4Kw7KeAAsaPo-ITPL--iHzSCUIgtml4RZtd74tMJFXzdgruvqbRCtRkvPV7eTyRKKukUt6IagY3IT9rs23jyXC0=w640-h366" /></div>
+    </section>
+
+    <section id="componentes">
+      <div class="section-title"><img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" /> Componentes</div>
+      <div class="section-content"><p>La arquitectura de microkernel se compone únicamente por:</p>
+  <ul>
+    <li><strong>Microkernel:</strong> Núcleo principal.</li>
+    <li><strong>Servidores:</strong> Múltiples servidores. Pueden existir <em>n</em> servidores, cada uno cumpliendo su respectiva función.</li>
+    <li><strong>Conexiones:</strong> Los servidores se conectan con el microkernel a través de <abbr title="Inter Process Communication">IPC</abbr>.</li>
+  </ul></div>
+      <div class="section-image"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEj6XPqmvG5acStSUBWTD6XuHe1KIiCt1P9J0bCAFHHzlRF5QCS_-Ksrtull88Wvu-Bj2FeB4PtVonI9E0pEOKeiR7QV5fwYmyNfznTNHxb5SI2C8ZBGMyY2zEwG7lBkp2JEDLw7gH2cXwEMWUFXk7H6zs6Qj2F4Skc9M-RY2O4s__EVSKdU9SLIBohL_oU=w640-h360" /></div>
+    </section>
+
+    <section id="caracteristicas">
+      <div class="section-title"><img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" /> Características</div>
+      <div class="section-content"><ul>
+    <li>
+      <strong>Microkernel:</strong> Contiene únicamente las funciones más esenciales de un sistema. Los demás servidores se ubican fuera del núcleo.
+    </li>
+    <li>
+      <strong>Servidores:</strong> Contienen diferentes servicios, donde cada uno cumple su respectiva función. Como están fuera del núcleo, operan en el espacio de usuario.
+    </li>
+    <li>
+      <strong>Modularidad:</strong> Cada servidor es un módulo independiente. Estos pueden actualizarse o modificarse sin afectar el núcleo principal.
+    </li>
+    <li>
+      <strong>Alta seguridad:</strong> Al estar separados del núcleo, los módulos ofrecen mayor seguridad, impidiendo que contenido malicioso comprometa el microkernel.
+    </li>
+    <li>
+      <strong>Eficiencia:</strong> Si un módulo falla, el microkernel y el sistema en general no se ven comprometidos.
+    </li>
+    <li>
+      <strong>Portabilidad:</strong> Debido a su tamaño reducido, el microkernel es fácil de portar y adaptar a otros sistemas.
+    </li>
+    <li>
+      <strong>Rendimiento:</strong> Aunque antes era considerado lento, ha mejorado con el tiempo, logrando ser un sistema eficiente y rápido.
+    </li>
+  </ul></div>
+      <div class="section-image1"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEgDBMuLw6yVnzPBB23fxt6L8F4IKkWZEXIVB8d1_aRSTP_1X04otG2-KARbwIX-pucnZEzIdnGOZK8mxGK93yoq82LYH8c7ZVM7hXVjUWwgYEgoCmGYqk9BFcO8QD7p6KnveE5Sp0KSdYvBsDV6G2mTc1FXRrb64E-G0oA8atvdO4ZyV4cMONvTj-lCM9Y=w400-h400" /></div>
+
+    </section>
+
+    <section id="funciones">
+      <div class="section-title"><img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" /> Funciones</div>
+      <div class="section-content"><p>Un sistema que funcione a través de este estilo de diseño destaca por sus múltiples funciones:</p>
+
+  <h4>1. Microkernel</h4>
+  <p>Es el corazón del sistema. Se encarga de las funciones más críticas, tales como:</p>
+  <ul>
+    <li>Comunicación entre procesos (IPC)</li>
+    <li>Gestión de procesos</li>
+    <li>Gestión de memoria básica</li>
+    <li>Planificación de tareas</li>
+    <li>Manejo de interrupciones</li>
+  </ul>
+
+  <h4>2. Servidores</h4>
+  <p>Cada servidor cumple una función diferente. Los más importantes son:</p>
+  <ul>
+    <li><strong>Servidor de archivos:</strong> Gestiona, lee y tiene acceso a los archivos.</li>
+    <li><strong>Servidor de red:</strong> Maneja protocolos como TCP/IP y OSI.</li>
+    <li><strong>Servidor de audio:</strong> Reproduce sonido.</li>
+    <li><strong>Servidor de video:</strong> Reproduce archivos de video. Junto con el de audio, maneja contenido multimedia.</li>
+    <li><strong>Interfaz gráfica:</strong> Gestiona el contenido visual que ve el usuario.</li>
+    <li><strong>Servidor de seguridad avanzada:</strong> Ofrece protección adicional que el núcleo no puede brindar por sí solo.</li>
+  </ul>
+
+  <h4>3. Intermediación</h4>
+  <p>Todos los servicios pasan obligatoriamente por el microkernel. Si un servicio desea comunicarse con otro, el microkernel intermedia esa conexión.</p>
+  <p>Además, el microkernel también actúa como intermediario entre el hardware y el software. Solo interactúa directamente con el hardware cuando es absolutamente necesario, para evitar sobrecargas y riesgos de seguridad.</p>
+
+  <h4>4. Capa divisora</h4>
+  <p>El microkernel separa el hardware del software, lo que permite que los módulos trabajen de forma eficiente sin afectar el funcionamiento del hardware.</p>
+
+  <h4>5. Clientes</h4>
+  <p>En las aplicaciones de usuario, los clientes interactúan con los programas, los cuales solicitan servicios a los servidores. Estas solicitudes pasan por el microkernel, que autoriza su uso.</p>
+  <p>Si el cliente necesita una función que depende del hardware, el microkernel también autoriza ese acceso.</p>
+
+  <h4>6. Manejadores de excepciones</h4>
+  <p>Se activan cuando ocurre un error. Detectan la falla, inician protocolos de recuperación y alertan al sistema. El microkernel continúa funcionando normalmente mientras tanto.</p>
+</div>
+      <div class="section-image2"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEj4_mEJovaL7NYc11i_S9nAqfQwkpOKUA6WWbKj1wCO96jkeo83Gk8BIc0ZJ2_tSlHiflwvww4YHJAb2_sqqaV-3CjApe8IfKvHFUAjz8ue6tKf6AmEQ4FxuIwjCYqbYM_YX2uKlSdV7w-IahaX0_sIuNuAvBokloYppNwnLgerIHbLTEkKt6qraSrGZMQ=w640-h627" /></div>
+    </section>
+
+    <section id="historia">
+      <div class="section-title"><img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" /> Historia</div>
+      <div class="section-content">p>La historia del diseño de <strong>microkernel</strong> surgió por la necesidad de solventar los problemas que generaban los sistemas <strong>monolíticos</strong>. Estos sistemas, creados a partir de la arquitectura monolítica, tenían un gran inconveniente: <strong>el sistema entero estaba integrado dentro del núcleo</strong>.</p>
+
+  <p>Aunque esto ofrecía un buen rendimiento —ya que todo estaba conectado entre sí—, también hacía que fuera difícil de mantener. Si una pequeña parte fallaba, podía provocar <strong>un colapso en todo el sistema</strong>. Además, la <strong>seguridad era más vulnerable</strong> frente a ataques maliciosos externos.</p>
+
+  <p>Frente a esto, surgió la idea del microkernel, que propone un sistema opuesto al monolítico: <em>dividir responsabilidades fuera del núcleo y simplificarlo</em>.</p>
+
+  <p>En la década de los 70, el informático danés <strong>Per Brinch Hansen</strong> formuló la idea de un sistema modular y eficiente, sentando las bases de lo que hoy se conoce como arquitectura de microkernel. Propuso núcleos simplificados en sistemas como el <strong>RC 4000</strong>.</p>
+   
+<div class="section-image1"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhSvOcUGRNkF-onoa5saC6HnUr7PuevU6GRemFbmPnm0MeOv011FV4TFIxWUxyweqAS6CPX9J7wr4jkqcQdY-FX-Jd7UZvpxkuK3XaspKAd0Rn_zwKrA0FGnfxrW1JpepbmVVAXXUQNQFuD7Y7Dtkiihi91s8mTcjjeyuKfG2slPpGOtt4L-wzCjBRLBJs=w640-h640" /></div>
+
+  <p>En 1987, <strong>Andrew S. Tanenbaum</strong> creó el sistema operativo académico <strong>MINIX</strong>, con arquitectura microkernel, con el objetivo de enseñar sobre sistemas estables y seguros. Este proyecto fue tan influyente que <strong>inspiró a Linus Torvalds para crear Linux</strong>.</p>
+
+  <p>El científico alemán <strong>Jochen Liedtke</strong> se convirtió en una figura clave en la evolución del microkernel. Durante un tiempo, esta arquitectura era criticada por su <strong>mal rendimiento</strong>, ya que debía procesar múltiples solicitudes de servicios externos.</p>
+
+  <p>Liedtke cambió esa percepción al desarrollar el <strong>microkernel L4</strong>, demostrando que el bajo rendimiento no era culpa del diseño, sino de su <em>mala implementación</em>.</p>
+
+  <blockquote>
+    <p><em>"El microkernel no es lento por diseño, sino por mala implementación."</em> – Jochen Liedtke</p>
+  </blockquote>
+
+  <p>Gracias a sus aportes, se comprobó que un microkernel bien diseñado podía ser <strong>eficiente, seguro y moderno</strong>.</p>
+
+  <p>Hoy en día, la arquitectura de microkernel continúa presente en muchos sectores, incluyendo:</p>
+  <ul>
+    <li>Tecnología automotriz</li>
+    <li>Sistemas militares</li>
+    <li>Sistemas de telecomunicaciones</li>
+    <li>Dispositivos embebidos</li>
+  </ul>
+<div class="section-image2"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEi-QOvNc5VX6nqVRHPuPXFK5mEPomAnnClYgRlvFLXpu1hqZ3BTyNMiBbxYUX7cQ-tnw9S9zxJNZlJeP2AudPTiPV-IthwHRthbY78tGojbVJzvkfbOnGeGHzg86M9gdDQuZw6du3sdo1G7OmGz56h67suvSx4LXfAne7QgsCYvdprlal8dKNCQ-PCS3GI=w461-h640" /></div>
+</div>
+    </section>
+
+    <section id="diferencias">
+      <div class="section-title"><img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" /> Diferencias con arquitectura monolítica</div>
+      <div class="section-content">Como ya vimos en la historia de la arquitectura de microkernel, funciona de manera distinta la arquitectura monolítica, en esta tabla se observan las diferencias:</div>
+      <div class="section-image"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEgfw-zefbRclT2lWoYeakVyLpZ79AuoK_w2e53SMajbHfcdl_v00n3Tv4345C8YfClTpfAHqzz6bqjB8AEM6RCMPuQUSmaeMHP3HPuE7MXiLy8NpB408an0bG9BIXiBs5d0jLfe3BolXW8YtRyioNhZKStY21h_tqMXEWfivHD7TTw2PTYpWDH_bW-x4pQ=w400-h403" /></div>
+      <div class="section-image"><img src="https://www.researchgate.net/profile/Reinier-Millo-Sanchez/publication/283507037/figure/fig2/AS:376309994803201@1466730702416/Figura-2-Sistema-basado-kernel-monolitico-y-microkernel-Tomada-de.png" /></div>
+
+    </section>
+
+    <section id="como-se-logra">
+      <div class="section-title"><img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" /> ¿Dificil de estructurar?</div>
+      <div class="section-content"><p>Es un proceso bastante complejo... crear un sistema o un software a partir de la arquitectura de microkernel conlleva sus desafíos. </p>
+      <p>Resulta complicado estructurar todo el sistema en servidores independientes del núcleo, el desarrollador se debe encargar de que cada servidor funcione separado del resto sin que los demás fallen, lo que supone otro problema: diseñar el sistema de tal manera que los servicios se puedan comunicar entre sí; desarrollar o ejecturar de manera incorrecta el sistema provocaría uno de los defectos más comúnes de la arquitectura de microkernel, el rendimiento no se debe ver afectado, independientemente de los procesos que soporta el microkernel. Para evitar que esto ocurra, se deben implementar adecuadamente las herramientas necesarias, de esta manera, el sistema funcionará eficientemente, sin problemas de rendimiento o realentización.</p></div>
+    </section>
+
+    <section id="ventajas-desventajas">
+      <div class="section-title"><img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" /> Ventajas y desventajas</div>
+      <div class="section-content">En esta tabla se analizan las ventajas y desventajas principales de la arquitectura de microkernel:</div>
+            <div class="section-image2"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEg3QhmnxmELY4zaQdodiZAQjlyhXEGY1doE3roDMXzqexp1Vl30ElRU6cNOqcMXeCRko6rOWZySP7wAxaqLE32_bCGg1isiAhafGNu05gRR74Hhd2xbs0kvhIodDe8qiJSEdy-Sh2D5es1MbYFysh8Nwuxf4HYyBzMZs-yox-CMaVbzmKywFNsG0UwfQ28=w531-h640" /></div>
+            <div class="section-image"><img src="https://www.researchgate.net/profile/Reinier-Millo-Sanchez/publication/283507037/figure/fig3/AS:376309994803202@1466730702446/Figura-3-Interaccion-entre-las-aplicaciones-de-usuario-y-el-kernel-del-sistema-Tomada.png" /></div>
+
+    </section>
+
+    <section id="usos">
+      <div class="section-title"><img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" /> Usos en la actualidad</div>
+      <div class="section-content">
+  <p>Varios sistemas operativos que funcionan en la actualidad están desarrollados a partir de esta arquitectura. Los más conocidos son <strong>MINIX</strong> y <strong>QNX</strong>. Otro ejemplo destacado es la familia de micronúcleos <strong>L4 Microkernel</strong>, ampliamente utilizada por su eficiencia y seguridad.</p>
+
+  <p>Hoy en día, la arquitectura de microkernel se implementa en diversos sectores de la industria tecnológica. Gracias a su diseño modular, ofrece ventajas como confiabilidad, portabilidad y protección ante fallos. Los sectores más comunes donde se aplica son:</p>
+
+  <ul>
+    <li>
+      <strong>Industria automotriz:</strong> Se utiliza para desarrollar autos inteligentes, permitiendo que un coche se conduzca solo y asegurando que si uno de los servicios falla, no afecte al resto del sistema. Marcas como <strong>Tesla, BMW y Audi</strong> han integrado esta arquitectura en sus tecnologías.
+    </li>
+    <li>
+      <strong>Sistemas militares y aeroespaciales:</strong> Tecnologías como el rastreo de misiles, control del tráfico aéreo o sistemas satelitales han implementado esta arquitectura. <strong>La NASA</strong> es una de las entidades más reconocidas por su uso.
+    </li>
+    <li>
+      <strong>Sistemas operativos actuales:</strong> <strong>Fuchsia OS</strong>, el sistema operativo en desarrollo por Google, está basado en esta arquitectura. Su microkernel, llamado <strong>Zircon</strong>, permite modularidad, seguridad, eficiencia en tiempo real y compatibilidad con diversos dispositivos, desde PC hasta celulares. Fuchsia OS es considerado uno de los proyectos más ambiciosos de Google y busca superar a Android.
+    </li>
+    <li>
+      <strong>Sistemas operativos enfocados en seguridad:</strong> Ejemplos como <strong>seL4, Nova OS</strong> y el <strong>Genode OS Framework</strong> destacan por su enfoque en la protección del sistema mediante un diseño microkernel.
+    </li>
+    <li>
+      <strong>Sistemas de telecomunicaciones:</strong> Se implementa en estaciones base 5G, routers inteligentes y en infraestructuras complejas de redes.
+    </li>
+    <li><strong>Máquinas virtuales</strong></li>
+    <li><strong>Servidores bare-metal</strong></li>
+    <li><strong>Dispositivos IoT (Internet of Things)</strong></li>
+    <li><strong>Laboratorios y dispositivos biomédicos</strong></li>
+  </ul>
+
+  <p>Gracias a su versatilidad, la arquitectura de microkernel se mantiene como una opción moderna, estable y segura en el desarrollo de tecnologías de alto rendimiento.</p>
+</div>
+            <div class="section-image"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEh_L8I_KEQikd5shccmaaKSEcxCO7_a6t2nR_xrsyTGCjxG52PKAOCEToxFKO9ijLu5CbHg88KzPoJ-D7hry7h9gQm4hZ0sRSZhJAvCKmE-e_Sv4BhXYXvEp4cGccPMg9SBseUgwAx8SP-OLiUblAN5XW1UlDDh2VHwdMx7QipBfA_xMKOZF77SVWUChBI=w640-h360" /></div>
+    </section>
+
+    <section id="plugins">
+      <div class="section-title"><img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" /> Arquitectura de plugins</div>
+      <div class="section-content"> <p>La arquitectura de plugins funciona de manera casi idéntica a la arquitectura de microkernel. Ambas se basan en una filosofía similar de diseño modular y extensible, por lo que se considera parte del mismo enfoque arquitectónico.</p>
+
+  <p>Los plugins operan de forma independiente a la base principal del programa, de la misma forma que los servidores en la arquitectura de microkernel lo hacen respecto al núcleo. Esta independencia permite que el sistema base se mantenga estable, mientras que las funcionalidades adicionales pueden ser agregadas o modificadas según las necesidades del usuario.</p>
+
+  <p>Esta arquitectura está orientada principalmente a programas y aplicaciones de usuario, con el objetivo de extender sus funciones mediante plugins. Los plugins amplían la experiencia del usuario al ofrecer herramientas y características que no están implementadas en el programa principal. Esto puede deberse a que el software no fue diseñado desde el inicio para incluir dichas funciones, o porque los plugins atienden necesidades muy específicas de ciertos grupos de usuarios.</p>
+
+  <p>Gracias a esta flexibilidad, cada usuario puede personalizar su experiencia de uso, añadiendo herramientas por conveniencia o gusto personal. De este modo, una misma aplicación puede adaptarse a diferentes propósitos y estilos de trabajo, sin comprometer la integridad o el rendimiento del programa base. Esta característica convierte a la arquitectura de plugins en una solución muy útil y eficiente.</p>
+
+  <p>Al igual que en la arquitectura de microkernel, desarrollar plugins para un programa específico puede resultar complejo. Esto se debe a que el programa principal y los plugins normalmente no son desarrollados de forma conjunta desde el inicio, por lo que es necesario el uso de APIs que permitan una comunicación efectiva entre ambos.</p>
+
+  <p>Además, los plugins deben diseñarse de manera que no alteren negativamente el funcionamiento del sistema principal. Su rol es únicamente extender las funcionalidades del programa, no sustituirlas ni interferir con ellas. En algunos casos, los plugins pueden estar diseñados para ofrecer una experiencia previa del servicio o herramienta que brindan, permitiendo al usuario evaluar su utilidad antes de adoptarlos completamente.</p>
+
+  <p>Cuando esta arquitectura se implementa correctamente, se logra un equilibrio perfecto entre estabilidad, personalización y escalabilidad, cumpliendo satisfactoriamente su propósito.</p>
+</div>
+            <div class="section-image"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEh-Svp3DwEZuXH8ian3wq4wedBgw6sM0ECGS9IFeiiTYRHDE-T5W4KMm4ZFQJXZVJENXhbCEia9s4elmoaqgWfUy_RNIOa3OdTNt5fMeqjBD53nLf5q6BYvUlbwDtpLf29J6x9S_sSlTQ4kdavvq4HXi_KxFdajKvukUPUd-EM_uUDXcq7Knfm3h94GktM=w640-h228" /></div>
+
+    </section>
+
+    <section id="ejemplos-plugins">
+      <div class="section-title"><img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" /> Uso de la arquitectura de plugins</div>
+      <div class="section-content">
+
+  <p>Muchas aplicaciones, programas y navegadores implementan la arquitectura de plugins en sus sistemas, permitiendo a los usuarios extender sus funcionalidades de forma personalizada y modular.</p>
+
+  <p>Un ejemplo destacado es Visual Studio Code, ampliamente reconocido por su compatibilidad con múltiples lenguajes de programación. Este editor permite instalar complementos que añaden soporte para distintos lenguajes, junto con sus respectivas librerías, convirtiéndolo en una herramienta versátil y accesible para cualquier persona interesada en programar, sin importar el lenguaje que utilice.</p>
+
+  <p>Otro caso muy conocido es Google Chrome, que ofrece una tienda virtual desde donde los usuarios pueden instalar extensiones que mejoran y personalizan su experiencia de navegación. Estas extensiones proporcionan funcionalidades adicionales, adaptadas a distintas necesidades. Navegadores como Brave, Microsoft Edge o incluso Opera GX también permiten el uso de estas extensiones cuando se utiliza la base de Chrome.</p>
+
+  <p>Adobe Photoshop también hace uso de esta arquitectura, permitiendo a los usuarios añadir herramientas externas con el fin de ampliar las capacidades del software, especialmente para mejorar la calidad de las imágenes editadas o incluir efectos avanzados que no vienen integrados por defecto.</p>
+
+  <p>Por último, OBS Studio, una herramienta muy popular para grabación de pantalla y transmisión en vivo, permite a los usuarios añadir extensiones como filtros visuales, efectos de sonido, o animaciones que se muestran en pantalla durante las transmisiones. De esta manera, cada persona puede personalizar su entorno de trabajo según sus gustos y necesidades específicas.</p>
+</div>
+    </section>
+
+    <section id="mods">
+      <div class="section-title"><img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" /> Microkernel vs Plugins</div>
+      <div class="section-content">  <p>Aunque ambas arquitecturas comparten una filosofía similar —la de mantener un núcleo mínimo y extender funcionalidades a través de componentes externos—, su propósito y aplicación son distintos.</p>
+
+  <p>La arquitectura de microkernel se implementa principalmente en sistemas operativos. Su enfoque es reducir al mínimo las tareas del núcleo, delegando los servicios adicionales a módulos independientes. Este diseño tiene como objetivo principal maximizar la seguridad del sistema, facilitar el mantenimiento y simplificar el funcionamiento del microkernel.</p>
+
+  <p>En cambio, la arquitectura de plugins está dirigida al desarrollo de programas y aplicaciones de usuario. Su finalidad es extender las funcionalidades del sistema mediante complementos que pueden añadirse según las necesidades o preferencias del usuario. Esto permite una experiencia personalizada, adaptada a diferentes usos y contextos, sin comprometer la estabilidad del programa principal.</p>
+</div>
+            <div class="section-image"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhfIk8ziA-wubk1l_ruTH56iAXIIPhtfKnbTIx4CnB4dx_lWvyBjLVxsuMFsjUrsF7T3G7s_9-bka2GjEciX6go94ty7u5y_3y4QykrcQ0b9MNaDX0dtVV7l2ffNtp6Vltc5AtDZ57f0c-6EewvAaJLL4myy646Tvymh8tDaq08u32XohRJ9EWPj6mLPG4=w640-h360" /></div>
+    </section>
+
+    <section id="microkernel-vs-plugins">
+      <div class="section-title"><img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" /> Mods?</div>
+      <div class="section-content">  <p>Un tema algo controversial en el mundo de la arquitectura de microkernel y plugins son los *mods*: extensiones de software implementadas en videojuegos que modifican el contenido original. Aunque comparten la misma filosofía —extender funcionalidades sin alterar directamente el núcleo del sistema—, en muchos casos los mods no están completamente aislados del núcleo del software del juego.</p>
+
+  <p>Algunos videojuegos no están diseñados desde el inicio con una arquitectura basada en plugins o microkernel. En su lugar, su sistema es lo suficientemente flexible para adaptarse a los mods, permitiendo que estos interactúen con el sistema base del videojuego. Los mods pueden modificar visualmente el entorno, añadir contenido nuevo o incluso alterar la jugabilidad, lo cual implica una posible interacción con el núcleo del juego. Por esta razón, no se puede considerar una arquitectura de plugins completamente implementada.</p>
+
+  <p>Además, si un mod no está bien diseñado o fue creado con malas intenciones, puede provocar fallos graves en el juego, afectando su estabilidad. En conclusión, aunque los mods no representan en esencia una arquitectura de plugins, sí comparten su filosofía al buscar extender o personalizar la experiencia del usuario de forma modular.</p>
+
+  <p>Algunos casos famosos de videojuegos con implementación de mods son:</p>
+
+  <ul>
+    <li><strong>Minecraft:</strong> A través de Forge, un servidor de código abierto, los usuarios pueden instalar miles de mods. Forge detecta la existencia de Minecraft en el equipo y permite modificar el juego, afectando aspectos visuales y de jugabilidad.</li>
+
+    <li><strong>Left 4 Dead 2:</strong> En la plataforma Steam, este videojuego permite desarrollar e instalar mods creados por la comunidad. Gracias a su arquitectura interna flexible, es uno de los juegos con más mods disponibles.</li>
+
+    <li><strong>GTA San Andreas:</strong> Aunque es un juego antiguo, permite la instalación de mods, como el popular "GTA San Andreas Multiplayer", que transforma el juego en una experiencia multijugador en línea, función inexistente en la versión original.</li>
+  </ul>
+</div>
+              <div class="section-image"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhUsATR5EeJVezo1kkl5OitGDIJTfGbPVsfkxFZLIoGw0vEfbU6NecHqXbxFh6gmFdHq8yoTqeolGXGl937HdAux1kdD5cfWOHH30hA9S0H3s0db4h2O9KRPa3tS6mtV3CBCC8-QMUExU43fqUreXC0CJfWSJKeYP3-J-xA4mnTgBWLb6MADlgNBuGiRLU=w640-h360" /></div>
+
+    </section>
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+  <p> © UdeC. Mayo 2025. Todos los derechos reservados.</p>
+  <p></p>
+  <p> Página Creada Por: Johan Rico</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
